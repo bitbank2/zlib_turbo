@@ -10,13 +10,15 @@ larry@bitbanksoftware.com<br>
 A library for decompressing deflated and gzip'd data.<br>
 
 <b>Why did you write it?</b><br>
-I've been writing imaging codecs for many years and I like to write 100% of the code for control of the design and to optimize performance. For PNG images, the compression is based on deflate (zlib). This library is somewhat challenging to recreate, but I decided to try to strip it down to the minimum code necessary to decompress the data. Part of the performance is lost due to all of the 'streaming' logic that can work with input and output data 1 byte at a time.<br>
+I've been writing imaging codecs for many years and I like to write 100% of the code for control of the design and to optimize performance. For PNG images, the compression is based on deflate (zlib). The zlib library is somewhat challenging to recreate, so I decided to try to strip it down to the minimum code necessary to decompress the data. I also optimized it a bit. Part of the performance of the original is lost due to all of the 'streaming' logic that can work with input and output data 1 byte at a time. My version requires the complete output buffer to be present, but you can still pass it input data in multiple passes. My code doesn't have any external dependencies and is a single C file of about 700 lines. One caveat is that it uses unaligned reads and writes to accelerate the decoding.<br>
 
 Features:<br>
 ---------<br>
-- Supports any MCU with at least 6.5K of RAM (Cortex-M0+ is the simplest I've tested)
+- Supports any MCU with at least 6.5K of RAM (Cortex-M4 is the simplest I've tested)
 - Optimized for speed and simplicity.
 - Generic C code with a C++ wrapper and no external dependencies (not even malloc).
+- 50-100% faster than zlib for all jobs
+- Easy gzip API too
 
 If you find this code useful, please consider becoming a sponsor or sending a donation.
 
