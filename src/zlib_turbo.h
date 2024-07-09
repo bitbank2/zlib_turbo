@@ -142,7 +142,7 @@ class zlib_turbo
 {
   public:
     void inflate_init(uint8_t *pOut, int iOutSize);
-    int inflate(uint8_t *pIn, int iInSize, bool bLast = true);
+    int inflate(uint8_t *pIn, int iInSize);
     int outSize(void);
     uint32_t gzip_info(uint8_t *pCompressed, int iSize, char *szName = NULL, uint32_t *pu32Time = NULL);
     int gunzip(uint8_t *pCompressed, int iSize, uint8_t *pUncompressed);

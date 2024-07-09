@@ -907,11 +907,11 @@ void zlib_turbo::inflate_init(uint8_t *pOut, int iOutSize)
 // handle the full sized output from the first call
 // The bLast flag tells the inflater that you've passed it the complete data (last chunk)
 //
-int zlib_turbo::inflate(uint8_t *pIn, int iInSize, bool bLast)
+int zlib_turbo::inflate(uint8_t *pIn, int iInSize)
 {
     _buffer.next_in = pIn;
     _buffer.avail_in = iInSize;
-    return zt_inflate(&_state, &_buffer, bLast);
+    return zt_inflate(&_state, &_buffer, 1);
 } /* inflate() */
 //
 // Returns the amount of data decompressed from the gzip file

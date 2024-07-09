@@ -1,8 +1,8 @@
 zlib_turbo<br>
 -----------------------------------
 Copyright (c) 2024 BitBank Software, Inc.<br>
-Written by Larry Bank<br>
-larry@bitbanksoftware.com<br>
+Written by Larry Bank (bitbank@pobox.com)<br>
+Portions copyright (c) 1995-2024 Mark Adler and Jean-loup Gailly
 <br>
 **I optimize other people's code for a living. This library is a good example of the kind of work I do for my commercial clients; it contains many unique and clever optimizations that allows it to perform better than anything else available. I'm happy to contribute optimized libraries to the open source community in addition to working on commercial projects. Whatever platform you're using, I can make significant improvements to your native code. Please contact me so that I can show you how.**<br>
 <br>
@@ -10,7 +10,7 @@ larry@bitbanksoftware.com<br>
 A library for decompressing deflated and gzip'd data.<br>
 
 <b>Why did you write it?</b><br>
-I've been writing imaging codecs for many years and I like to write 100% of the code for control of the design and to optimize performance. For PNG images, the compression is based on deflate (zlib). The zlib library is somewhat challenging to recreate, so I decided to try to strip it down to the minimum code necessary to decompress the data. I also optimized it a bit. Part of the performance of the original is lost due to all of the 'streaming' logic that can work with input and output data 1 byte at a time. My version requires the complete output buffer to be present, but you can still pass it input data in multiple passes. My code doesn't have any external dependencies and is a single C file of about 700 lines. One caveat is that it uses unaligned reads and writes to accelerate the decoding.<br>
+I've been writing imaging codecs for many years and I like to write 100% of the code for control of the design and to optimize performance. For PNG images, the compression is based on deflate (zlib). The zlib library is somewhat challenging to recreate, so I decided to try to strip it down to the minimum code necessary to decompress the data. I also optimized it a bit. Part of the performance of the original zlib is hurt due to all of the 'streaming' logic that can work with input and output data 1 byte at a time. My version requires the complete output buffer to be present. The C++ wrapper functions are atomic (all data in -> all data out), but with the C code you can still pass it the input data in multiple passes. My code doesn't have any external dependencies and is a single C file of about 700 lines. One caveat is that it uses unaligned reads and writes to accelerate the decoding, so the input buffer and output buffer need to be allocated 4-8 bytes larger than needed (32/64-bit systems) to allow for reads/writes past the end.<br>
 
 Features:<br>
 ---------<br>
